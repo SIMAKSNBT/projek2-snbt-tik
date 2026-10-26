@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMAK SNBT - Siap Memasak SNBT untuk Anak SMK & SMA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        simakRed: {
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                        },
+                        simakOrange: {
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-simak {
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="gradient-simak p-2.5 rounded-xl text-white shadow-md shadow-orange-500/20">
+                    <i class="fa-solid fa-fire text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-black text-2xl tracking-tight text-gradient">SIMAK</span>
+                    <span class="text-xs font-semibold block text-slate-500 dark:text-slate-400 -mt-1 tracking-wider">SIAP MEMASAK SNBT</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links & Theme Toggle -->
+            <div class="flex items-center space-x-3 sm:space-x-5">
+                <a href="#jadwal" class="hidden md:inline-block font-medium text-sm hover:text-simakOrange-600 transition">Jadwal Belajar</a>
+                <a href="#kuis" class="hidden md:inline-block font-medium text-sm hover:text-simakOrange-600 transition">Modul & Kuis</a>
+                <a href="#rekap" class="hidden md:inline-block font-medium text-sm hover:text-simakOrange-600 transition">Rekap Kelemahan</a>
+                <a href="#premium" class="hidden sm:inline-block bg-gradient-to-r from-simakRed-600 to-simakOrange-600 text-white text-xs font-bold px-3 py-2 rounded-lg shadow hover:opacity-90 transition">
+                    <i class="fa-solid fa-crown mr-1"></i> Premium
+                </a>
+                
+                <!-- Dark Mode Toggle Button -->
+                <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+                    <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+        <!-- HERO & COUNTDOWN DASHBOARD -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Hero Card -->
+            <div class="lg:col-span-2 gradient-simak rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-orange-600/10 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 text-white/10 text-9xl font-black pointer-events-none">
+                    SNBT
+                </div>
+                <div class="relative z-10">
+                    <span class="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest backdrop-blur-sm">
+                        🔥 Spesifik Anak SMK & SMA Sibuk
+                    </span>
+                    <h1 class="text-3xl sm:text-4xl font-black mt-4 leading-tight">
+                        Takut Ketinggalan Materi SNBT karena Sibuk Praktikum & Sekolah?
+                    </h1>
+                    <p class="mt-3 text-white/90 text-sm sm:text-base max-w-xl">
+                        Kuasai materi UTBK secara bertahap dengan metode "Memasak" harian: 15 menit baca materi ringkas, dilanjutkan 5 menit kuis evaluasi ber-timer!
+                    </p>
+                </div>
+                <div class="mt-8 flex flex-wrap gap-3 relative z-10">
+                    <a href="#kuis" class="bg-white text-simakRed-600 font-extrabold px-6 py-3 rounded-xl shadow-lg hover:bg-slate-100 transition text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-play"></i> Mulai Belajar Hari Ini
+                    </a>
+                    <a href="#premium" class="bg-black/20 hover:bg-black/30 backdrop-blur-md text-white border border-white/30 font-bold px-5 py-3 rounded-xl transition text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-book-open"></i> Beli E-Book Pembahas Cepat
+                    </a>
+                </div>
+            </div>
+
+            <!-- Interactive Countdown Card -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-lg border border-slate-200/80 dark:border-slate-700 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-3 mb-4">
+                        <h2 class="font-bold text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-simakOrange-600"></i> Target Waktu SNBT
+                        </h2>
+                        <button onclick="toggleDateSettings()" class="text-xs text-simakOrange-600 hover:underline font-semibold">
+                            <i class="fa-solid fa-pen-to-square"></i> Atur Tanggal
+                        </button>
+                    </div>
+
+                    <!-- Input Settings Form (Hidden by default or toggled) -->
+                    <div id="dateSettings" class="hidden bg-slate-50 dark:bg-slate-900 p-4 rounded-xl mb-4 space-y-3 border border-slate-200 dark:border-slate-700">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Tanggal Mulai Belajar (H+):</label>
+                            <input type="date" id="startDateInput" class="w-full text-xs p-2 rounded-lg border dark:bg-slate-800 border-slate-300 dark:border-slate-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Tanggal UTBK / SNBT (H-):</label>
+                            <input type="date" id="utbkDateInput" class="w-full text-xs p-2 rounded-lg border dark:bg-slate-800 border-slate-300 dark:border-slate-600">
+                        </div>
+                        <button onclick="saveDates()" class="w-full gradient-simak text-white font-bold text-xs py-2 rounded-lg shadow hover:opacity-90">
+                            Simpan Target
+                        </button>
+                    </div>
+
+                    <!-- Countdown Displays -->
+                    <div class="space-y-4">
+                        <!-- H+ Belajar -->
+                        <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Konsistensi Belajar</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400">Telah berjalan sejak mulai</span>
+                            </div>
+                            <div class="text-right">
+                                <span id="dayPlusDisplay" class="text-2xl font-black text-simakOrange-600">H+1</span>
+                                <span class="text-xs font-bold block text-slate-400">Hari</span>
+                            </div>
+                        </div>
+
+                        <!-- H- UTBK -->
+                        <div class="bg-simakRed-50 dark:bg-simakRed-950/30 p-4 rounded-2xl border border-simakRed-100 dark:border-simakRed-900/50 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-simakRed-600 dark:text-simakRed-400 uppercase tracking-wider block">Sisa Waktu UTBK</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400">Sebelum Ujian Dimulai</span>
+                            </div>
+                            <div class="text-right">
+                                <span id="dayMinusDisplay" class="text-3xl font-black text-simakRed-600 dark:text-simakRed-400">H-45</span>
+                                <span class="text-xs font-bold block text-simakRed-500">Hari Lagi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-xs text-center text-slate-400 mt-4 italic">
+                    "Kunci anak SMK lulus SNBT: Konsisten 20 menit per hari daripada 5 jam sistem semalam!"
+                </p>
+            </div>
+        </section>
+
+        <!-- JALUR BELAJAR TERJADWAL -->
+        <section id="jadwal" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg border border-slate-200/80 dark:border-slate-700">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div>
+                    <span class="text-xs font-bold text-simakOrange-600 uppercase tracking-widest">Jadwal Terstruktur Anak SMK</span>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mt-1">Jalur Belajar Harian (Daily Learning Path)</h2>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-700 p-1.5 rounded-xl">
+                    <button onclick="switchDay(1)" id="dayBtn1" class="px-4 py-2 rounded-lg font-bold text-xs transition bg-gradient-to-r from-simakRed-600 to-simakOrange-600 text-white shadow">Hari 1</button>
+                    <button onclick="switchDay(2)" id="dayBtn2" class="px-4 py-2 rounded-lg font-bold text-xs transition text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600">Hari 2</button>
+                    <button onclick="switchDay(3)" id="dayBtn3" class="px-4 py-2 rounded-lg font-bold text-xs transition text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600">Hari 3</button>
+                </div>
+            </div>
+
+            <!-- Schedule Card Body -->
+            <div id="scheduleContent" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+        <!-- MODUL MATERIAL & QUIZ WITH TIMER -->
+        <section id="kuis" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Pembahasan Materi (Left Column) -->
+            <div class="lg:col-span-6 bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg border border-slate-200/80 dark:border-slate-700 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span id="materiCategory" class="bg-orange-100 dark:bg-orange-950/60 text-simakOrange-600 dark:text-simakOrange-400 text-xs font-bold px-3 py-1 rounded-full">
+                            Kemampuan Penalaran Umum
+                        </span>
+                        <span class="text-xs text-slate-400 font-semibold"><i class="fa-regular fa-clock"></i> 5 Min Read</span>
+                    </div>
+                    <h3 id="materiTitle" class="text-xl font-bold mb-4 text-slate-900 dark:text-white">
+                        Penalaran Induktif & Pola Bilangan Cepat
+                    </h3>
+                    <div id="materiBody" class="prose dark:prose-invert text-sm text-slate-600 dark:text-slate-300 space-y-3 leading-relaxed">
+                        <p><strong>Triks Cepat Anak SMK:</strong> Jangan menghitung ulang deret angka dari awal! Cari hubungan antar suku yang bersebelahan atau selang-seling (pola lompat).</p>
+                        <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border-l-4 border-simakOrange-600 my-3">
+                            <p class="font-mono text-xs text-slate-800 dark:text-slate-200">Contoh Pola: 2, 4, 8, 16, 32 ... (Perkalian 2)</p>
+                            <p class="font-mono text-xs text-slate-800 dark:text-slate-200">Pola Selang-seling: 3, 10, 5, 12, 7, 14 ... (Lompat 1: +2 pada urutan ganjil, +2 pada urutan genap).</p>
+                        </div>
+                        <p>Ingat, pada tes TPS SNBT, kamu hanya punya waktu sekitar 60-90 detik per soal. Kenali karakteristik pola prima, kuadrat, dan fibonacci.</p>
+                    </div>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs text-slate-400">
+                    <span><i class="fa-solid fa-circle-check text-green-500"></i> Materi Harian Tervalidasi</span>
+                    <span>Modul #01</span>
+                </div>
+            </div>
+
+            <!-- Quiz Interactive Card (Right Column) -->
+            <div class="lg:col-span-6 bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg border border-slate-200/80 dark:border-slate-700 flex flex-col justify-between relative overflow-hidden">
+                <div>
+                    <!-- Quiz Header & Timer -->
+                    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-4 mb-4">
+                        <div>
+                            <span class="text-xs font-bold text-simakRed-600 uppercase tracking-wider block">Kuis Kilat Simulasi</span>
+                            <h4 class="font-bold text-slate-900 dark:text-white">Uji Pemahaman Materi</h4>
+                        </div>
+                        <!-- Timer Box -->
+                        <div class="flex items-center gap-2 bg-simakRed-50 dark:bg-simakRed-950/50 px-3 py-1.5 rounded-xl border border-simakRed-200 dark:border-simakRed-900">
+                            <i class="fa-solid fa-stopwatch text-simakRed-600 animate-pulse"></i>
+                            <span id="quizTimer" class="font-mono font-bold text-simakRed-600 dark:text-simakRed-400 text-lg">01:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Question Container -->
+                    <div id="quizContainer">
+                        <p id="questionText" class="font-semibold text-slate-800 dark:text-slate-100 text-base mb-4">
+                            Berapakah angka selanjutnya dari barisan berikut: 4, 9, 19, 39, 79, ... ?
+                        </p>
+                        <!-- Options list -->
+                        <div id="optionsContainer" class="space-y-2.5">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Quiz Feedback Box -->
+                    <div id="quizFeedback" class="hidden mt-4 p-4 rounded-xl text-sm font-medium border"></div>
+                </div>
+
+                <!-- Footer Buttons -->
+                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                    <span id="quizScoreText" class="text-xs font-bold text-slate-400">Kuis 1 dari 3</span>
+                    <button id="nextQuestionBtn" onclick="nextQuestion()" disabled class="gradient-simak text-white opacity-50 font-bold px-5 py-2.5 rounded-xl text-xs shadow transition cursor-not-allowed">
+                        Soal Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- DASHBOARD REKAP & VISUALISASI KELEMAHAN (WEEKLY REPORT) -->
+        <section id="rekap" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg border border-slate-200/80 dark:border-slate-700">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div>
+                    <span class="text-xs font-bold text-simakOrange-600 uppercase tracking-widest">Analytics Dashboard</span>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mt-1">Rekap Performa & Analisis Kelemahan Belajar</h2>
+                </div>
+                <button onclick="refreshAnalytics()" class="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-3 py-2 rounded-lg font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> Update Rekap
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Chart Visualizer (6 Cols) -->
+                <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
+                    <h4 class="text-sm font-bold mb-4 text-center sm:text-left text-slate-700 dark:text-slate-300">
+                        Penguasaan Subtes SNBT (Skor / 100)
+                    </h4>
+                    <div class="relative h-64 w-full">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- AI Recommendation Box (5 Cols) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-900 dark:to-orange-950/30 p-5 rounded-2xl border border-orange-200/60 dark:border-orange-900/40">
+                        <div class="flex items-center gap-2 text-simakOrange-600 dark:text-simakOrange-400 font-bold text-sm mb-2">
+                            <i class="fa-solid fa-robot text-lg"></i> AI Rekomendasi SIMAK
+                        </div>
+                        <h4 id="aiWeaknessTitle" class="font-black text-slate-900 dark:text-white text-base">
+                            ⚠️ Kelemahan Terdeteksi: Penalaran Matematika (Skor: 45)
+                        </h4>
+                        <p id="aiWeaknessDesc" class="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                            Berdasarkan hasil kuis kamu minggu ini, kamu membutuhkan latihan ekstra di aljabar & interpretasi grafik. Alokasikan waktu 15 menit tambahan di Hari 4.
+                        </p>
+                    </div>
+
+                    <!-- Quick Action Based on Weakness -->
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold block">Rekomendasi Modul Pengulangan:</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Drill Soal Penalaran Matematika</span>
+                        </div>
+                        <a href="#kuis" class="bg-simakOrange-600 hover:bg-simakOrange-700 text-white font-bold text-xs px-3 py-2 rounded-lg transition">
+                            Pelajari Ulang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURE MONETISASI / WIRAUSAHA -->
+        <section id="premium" class="gradient-simak rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+            <div class="max-w-3xl relative z-10">
+                <span class="bg-black/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">
+                    💎 Akses Premium & E-Book SIMAK
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black mt-3">
+                    Mau Trik Cepat Pembahasan UTBK Spesial Anak SMK?
+                </h2>
+                <p class="mt-3 text-white/90 text-sm sm:text-base">
+                    Dapatkan E-Book **"Formula Memasak SNBT 2026"** + Akses Grup WA Mentoring Harian & Bank Soal Eksklusif hanya dengan harga ramah kantong pelajar!
+                </p>
+
+                <!-- Cards Pricing -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                    <!-- Option 1 -->
+                    <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-orange-200">PAKET E-BOOK FAST TRACK</span>
+                            <div class="text-2xl font-black mt-1">Rp 29.000 <span class="text-xs font-normal text-white/70">/sekali bayar</span></div>
+                            <ul class="text-xs mt-3 space-y-1.5 text-white/90">
+                                <li><i class="fa-solid fa-check text-green-300 mr-1"></i> E-book PDF Trik 10 Detik Soal TPS</li>
+                                <li><i class="fa-solid fa-check text-green-300 mr-1"></i> 500+ Bank Soal & Kunci Jawaban</li>
+                            </ul>
+                        </div>
+                        <button onclick="checkoutWA('Paket E-Book Fast Track', '29.000')" class="mt-4 w-full bg-white text-simakRed-600 font-extrabold py-2.5 rounded-xl text-xs hover:bg-slate-100 transition flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg text-green-600"></i> Beli E-Book Instant
+                        </button>
+                    </div>
+
+                    <!-- Option 2 -->
+                    <div class="bg-white/20 backdrop-blur-md p-5 rounded-2xl border border-white/40 flex flex-col justify-between relative">
+                        <span class="absolute -top-3 right-4 bg-yellow-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full">PALING LARIS</span>
+                        <div>
+                            <span class="text-xs font-bold text-yellow-200">MENTORING VIP SNBT SMK</span>
+                            <div class="text-2xl font-black mt-1">Rp 79.000 <span class="text-xs font-normal text-white/70">/bulan</span></div>
+                            <ul class="text-xs mt-3 space-y-1.5 text-white/90">
+                                <li><i class="fa-solid fa-check text-green-300 mr-1"></i> Semua Fitur E-Book</li>
+                                <li><i class="fa-solid fa-check text-green-300 mr-1"></i> Grup WA Diskusi Soal 24/7</li>
+                                <li><i class="fa-solid fa-check text-green-300 mr-1"></i> Tryout Mingguan Terjadwal</li>
+                            </ul>
+                        </div>
+                        <button onclick="checkoutWA('Mentoring VIP SNBT SMK', '79.000')" class="mt-4 w-full bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg text-green-600"></i> Gabung VIP Mentoring
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-6 mt-10">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2">
+            <p class="font-bold">&copy; 2026 SIMAK SNBT - Solusi Belajar UTBK Berbasis AI untuk Anak SMK & SMA.</p>
+            <p>Dirancang untuk memudahakan manajemen waktu & efisiensi belajar harian.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // --- 1. THEME SWITCHER (DARK / LIGHT MODE) ---
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        // Init Theme from LocalStorage or System Preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // --- 2. COUNTDOWN & H+ / H- DATES MANAGEMENT ---
+        function initDates() {
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Default dates if not set
+            let startDate = localStorage.getItem('simak_start_date') || today;
+            let utbkDate = localStorage.getItem('simak_utbk_date');
+            
+            if (!utbkDate) {
+                // Default target UTBK 45 days from now
+                const future = new Date();
+                future.setDate(future.getDate() + 45);
+                utbkDate = future.toISOString().split('T')[0];
+            }
+
+            document.getElementById('startDateInput').value = startDate;
+            document.getElementById('utbkDateInput').value = utbkDate;
+            
+            calculateDays(startDate, utbkDate);
+        }
+
+        function calculateDays(startDateStr, utbkDateStr) {
+            const now = new Date();
+            now.setHours(0,0,0,0);
+
+            const start = new Date(startDateStr);
+            const utbk = new Date(utbkDateStr);
+
+            // Calculate H+ (Days since start)
+            const diffStart = Math.floor((now - start) / (1000 * 60 * 60 * 24)) + 1;
+            const hPlus = diffStart > 0 ? diffStart : 1;
+
+            // Calculate H- (Days left until UTBK)
+            const diffUtbk = Math.ceil((utbk - now) / (1000 * 60 * 60 * 24));
+            const hMinus = diffUtbk >= 0 ? diffUtbk : 0;
+
+            document.getElementById('dayPlusDisplay').innerText = `H+${hPlus}`;
+            document.getElementById('dayMinusDisplay').innerText = `H-${hMinus}`;
+        }
+
+        function toggleDateSettings() {
+            const el = document.getElementById('dateSettings');
+            el.classList.toggle('hidden');
+        }
+
+        function saveDates() {
+            const startVal = document.getElementById('startDateInput').value;
+            const utbkVal = document.getElementById('utbkDateInput').value;
+
+            if (startVal && utbkVal) {
+                localStorage.setItem('simak_start_date', startVal);
+                localStorage.setItem('simak_utbk_date', utbkVal);
+                calculateDays(startVal, utbkVal);
+                toggleDateSettings();
+            }
+        }
+
+        // --- 3. DAILY LEARNING PATH (JADWAL BELAJAR) ---
+        const scheduleData = {
+            1: [
+                { title: "Penalaran Induktif", type: "TPS", duration: "15 min", desc: "Mengenali pola deret angka & selisih kuadrat." },
+                { title: "Kuis Timer #1", type: "Evaluasi", duration: "5 min", desc: "Kuis 3 soal ber-timer untuk melatih kecepatan." },
+                { title: "Review Kelemahan", type: "Analisis", duration: "5 min", desc: "Analisis otomatis skor kuis." }
+            ],
+            2: [
+                { title: "Pemahaman Bacaan", type: "Literasi", duration: "15 min", desc: "Menentukan ide pokok paragraf panjang dengan metode skimming." },
+                { title: "Kuis Timer #2", type: "Evaluasi", duration: "5 min", desc: "Latihan menemukan simpulan paragraf." },
+                { title: "E-Book Drill", type: "Mandiri", duration: "10 min", desc: "Membaca 2 halaman trik cepat e-book." }
+            ],
+            3: [
+                { title: "Penalaran Matematika", type: "Penalaran", duration: "20 min", desc: "Persamaan garis & soal cerita perbandingan bernilai." },
+                { title: "Kuis Timer #3", type: "Evaluasi", duration: "5 min", desc: "Uji logika matematika sederhana." },
+                { title: "Evaluasi Mingguan", type: "Rekap", duration: "5 min", desc: "Cek grafik radar penguasaan subtes." }
+            ]
+        };
+
+        function switchDay(dayNum) {
+            // Update Tab styles
+            [1, 2, 3].forEach(d => {
+                const btn = document.getElementById(`dayBtn${d}`);
+                if (d === dayNum) {
+                    btn.className = "px-4 py-2 rounded-lg font-bold text-xs transition bg-gradient-to-r from-simakRed-600 to-simakOrange-600 text-white shadow";
+                } else {
+                    btn.className = "px-4 py-2 rounded-lg font-bold text-xs transition text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600";
+                }
+            });
+
+            // Populate schedule content
+            const container = document.getElementById('scheduleContent');
+            const data = scheduleData[dayNum] || scheduleData[1];
+            
+            container.innerHTML = data.map(item => `
+                <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-2">
+                            <span class="font-bold text-simakOrange-600 bg-orange-100 dark:bg-orange-950/60 px-2 py-0.5 rounded">${item.type}</span>
+                            <span class="text-slate-400 font-mono"><i class="fa-regular fa-clock"></i> ${item.duration}</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white">${item.title}</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${item.desc}</p>
+                    </div>
+                    <button onclick="window.location.href='#kuis'" class="mt-4 text-xs font-bold text-simakRed-600 dark:text-simakRed-400 hover:underline text-left">
+                        Mulai Modul Ini &rarr;
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // --- 4. QUIZ ENGINE WITH TIMER ---
+        const quizQuestions = [
+            {
+                question: "Berapakah angka selanjutnya dari barisan berikut: 4, 9, 19, 39, 79, ... ?",
+                options: ["149", "159", "169", "139"],
+                correct: 1, // index 1 = 159 (Pola: x2 + 1)
+                explanation: "Pola: (4x2)+1 = 9, (9x2)+1 = 19, (19x2)+1 = 39, (39x2)+1 = 79, (79x2)+1 = 159."
+            },
+            {
+                question: "Semua siswa SMK belajar Praktikum. Sebagian siswa SMK suka membaca buku UTBK. Simpulan yang tepat adalah...",
+                options: [
+                    "Semua siswa SMK suka membaca buku UTBK",
+                    "Sebagian siswa SMK yang belajar Praktikum suka membaca buku UTBK",
+                    "Tidak ada siswa SMK yang suka membaca buku UTBK",
+                    "Semua yang suka membaca buku UTBK adalah siswa SMA"
+                ],
+                correct: 1,
+                explanation: "Premis 1: Semua SMK = Praktikum. Premis 2: Sebagian SMK = Suka UTBK. Maka sebagian yang belajar praktikum juga suka membaca UTBK."
+            },
+            {
+                question: "Jika 3 pekerja menyelesaikan pembuatan modul dalam 6 hari, berapa hari yang dibutuhkan 9 pekerja?",
+                options: ["1 Hari", "2 Hari", "3 Hari", "4 Hari"],
+                correct: 1, // 2 Hari (Perbandingan berbalik nilai: 3*6 / 9 = 2)
+                explanation: "Perbandingan berbalik nilai: (3 pekerja x 6 hari) / 9 pekerja = 18 / 9 = 2 Hari."
+            }
+        ];
+
+        let currentQIndex = 0;
+        let timerInterval = null;
+        let timeLeft = 60; // 60 seconds per question
+        let quizScores = { TPS: 80, Literasi: 70, PenalaranMat: 45, Kuantitatif: 85 };
+
+        function startQuizTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 60;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeOut();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const sec = timeLeft < 10 ? `0${timeLeft}` : timeLeft;
+            document.getElementById('quizTimer').innerText = `00:${sec}`;
+        }
+
+        function loadQuestion(index) {
+            const q = quizQuestions[index];
+            document.getElementById('questionText').innerText = `${index + 1}. ${q.question}`;
+            document.getElementById('quizScoreText').innerText = `Kuis ${index + 1} dari ${quizQuestions.length}`;
+            
+            const optionsDiv = document.getElementById('optionsContainer');
+            optionsDiv.innerHTML = q.options.map((opt, i) => `
+                <button onclick="selectOption(${i})" id="optBtn_${i}" class="w-full text-left p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition text-xs font-medium flex items-center justify-between">
+                    <span>${String.fromCharCode(65 + i)}. ${opt}</span>
+                    <i class="fa-regular fa-circle text-slate-400"></i>
+                </button>
+            `).join('');
+
+            // Hide feedback
+            const feedback = document.getElementById('quizFeedback');
+            feedback.className = "hidden mt-4 p-4 rounded-xl text-sm font-medium border";
+            
+            // Disable Next Button until answered
+            const nextBtn = document.getElementById('nextQuestionBtn');
+            nextBtn.disabled = true;
+            nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            startQuizTimer();
+        }
+
+        function selectOption(selectedIndex) {
+            clearInterval(timerInterval);
+            const q = quizQuestions[currentQIndex];
+            const feedback = document.getElementById('quizFeedback');
+
+            // Disable all option buttons
+            q.options.forEach((_, i) => {
+                const btn = document.getElementById(`optBtn_${i}`);
+                btn.disabled = true;
+                btn.classList.add('cursor-default');
+            });
+
+            const selectedBtn = document.getElementById(`optBtn_${selectedIndex}`);
+            const correctBtn = document.getElementById(`optBtn_${q.correct}`);
+
+            if (selectedIndex === q.correct) {
+                selectedBtn.classList.add('bg-green-100', 'dark:bg-green-950/60', 'border-green-500', 'text-green-800', 'dark:text-green-200');
+                selectedBtn.querySelector('i').className = "fa-solid fa-circle-check text-green-600";
+                
+                feedback.className = "mt-4 p-4 rounded-xl text-xs font-medium bg-green-50 dark:bg-green-950/40 border-green-200 dark:border-green-900 text-green-800 dark:text-green-300 block";
+                feedback.innerHTML = `<strong>✨ Jawaban Benar!</strong><br>${q.explanation}`;
+                
+                // Slightly boost TPS score in chart demo
+                quizScores.TPS = Math.min(100, quizScores.TPS + 5);
+            } else {
+                selectedBtn.classList.add('bg-red-100', 'dark:bg-red-950/60', 'border-red-500', 'text-red-800', 'dark:text-red-200');
+                selectedBtn.querySelector('i').className = "fa-solid fa-circle-xmark text-red-600";
+                
+                correctBtn.classList.add('bg-green-100', 'dark:bg-green-950/60', 'border-green-500');
+
+                feedback.className = "mt-4 p-4 rounded-xl text-xs font-medium bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900 text-red-800 dark:text-red-300 block";
+                feedback.innerHTML = `<strong>❌ Jawaban Kurang Tepat.</strong><br>${q.explanation}`;
+            }
+
+            // Enable Next Button
+            const nextBtn = document.getElementById('nextQuestionBtn');
+            nextBtn.disabled = false;
+            nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            
+            updateChart();
+        }
+
+        function handleTimeOut() {
+            const feedback = document.getElementById('quizFeedback');
+            feedback.className = "mt-4 p-4 rounded-xl text-xs font-medium bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900 text-amber-800 dark:text-amber-300 block";
+            feedback.innerHTML = `<strong>⏰ Waktu Habis!</strong> Biasakan mengerjakan soal lebih cepat di ujian sebenarnya.`;
+
+            // Enable Next Button
+            const nextBtn = document.getElementById('nextQuestionBtn');
+            nextBtn.disabled = false;
+            nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+
+        function nextQuestion() {
+            currentQIndex++;
+            if (currentQIndex < quizQuestions.length) {
+                loadQuestion(currentQIndex);
+            } else {
+                currentQIndex = 0;
+                loadQuestion(currentQIndex);
+                alert("🎉 Selamat! Kamu telah menyelesaikan seri kuis harian ini.");
+            }
+        }
+
+        // --- 5. REKAP & VISUALISASI KELEMAHAN (CHART.JS) ---
+        let perfChart;
+
+        function initChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#94a3b8' : '#64748b';
+
+            perfChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Penalaran Umum', 'Literasi Ind/Eng', 'Penalaran Mat.', 'Pengetahuan Kuantitatif'],
+                    datasets: [{
+                        label: 'Skor Penguasaan (%)',
+                        data: [quizScores.TPS, quizScores.Literasi, quizScores.PenalaranMat, quizScores.Kuantitatif],
+                        backgroundColor: [
+                            '#ea580c',
+                            '#f97316',
+                            '#dc2626', // Red highlight for weakness
+                            '#ea580c'
+                        ],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { color: textColor }
+                        },
+                        x: {
+                            ticks: { color: textColor }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            if (perfChart) {
+                perfChart.data.datasets[0].data = [quizScores.TPS, quizScores.Literasi, quizScores.PenalaranMat, quizScores.Kuantitatif];
+                perfChart.update();
+            }
+        }
+
+        function refreshAnalytics() {
+            // Randomize small variation to demo dynamic AI analysis
+            quizScores.PenalaranMat = Math.floor(Math.random() * 20) + 35;
+            updateChart();
+            alert("📊 Data rekap belajar & saran AI berhasil diperbarui!");
+        }
+
+        // --- 6. MONETISASI / CHECKOUT WHATSAPP ---
+        function checkoutWA(packageName, price) {
+            const phone = "6281234567890"; // Ganti nomor WhatsApp pengembang/wirausaha
+            const text = `Halo Admin SIMAK SNBT! Saya mau membeli *${packageName}* seharga Rp${price}. Mohon panduan pembayarannya ya!`;
+            const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // INITIALIZATION ON LOAD
+        window.onload = function() {
+            initDates();
+            switchDay(1);
+            loadQuestion(0);
+            initChart();
+        };
+    </script>
+</body>
+</html>
